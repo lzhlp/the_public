@@ -1,0 +1,216 @@
+<html>
+    <head>
+        <title>请完善个人信息</title>
+        <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+         <script type="text/javascript" src="/js/jquery/jquery-1.7.2.min.js"></script>
+         <script type="text/javascript" src="/js/jquery/jquery.easyui.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <style></style>
+    </head>
+    <body style="font-family: cursive;">
+    <form id="addFormAll" method="post" enctype="multipart/form-data">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-offset-2 col-md-8" style="font-size: 30; margin-top: 40px; ">
+                <span >登录成功 您的账号为：</span>
+                <span th:text="${name}"></span>
+                <input type="hidden" name="id" th:value="${id}">
+                <input type="hidden" name="hobby" id="hobby" value="0">
+                <input type="hidden" name="hobby1" id="hobby1" value="0">
+                <input type="hidden" name="hobby2" id="hobby2" value="0">
+                <input type="hidden" name="hobby3" id="hobby3" value="0">
+                <input type="hidden"  id="status" value="1">
+                <input type="hidden"  id="status1" value="1">
+                <input type="hidden"  id="status2" value="1">
+                <input type="hidden"  id="status3" value="1">
+                </div>
+            </div>
+             <br>
+            <div class="row">
+                <div class="col-md-12" style="font-size:20px; margin-top:40px;">
+                    This is sample webpage with dummy elements that will help you in learning selenium automation.
+                </div>
+            </div>
+            <br>
+
+            <div class="row">
+                <div class="col-md-12" style="font-size:15px;">
+                    <p> <b>Selenium WebDriver常用命令 : </b><a href="https://www.yiibai.com/selenium/selenium-webdriver-commands.html">这是链接，请点击!</a></p>
+                </div>
+            </div>
+            <br>
+
+            <div class="row">
+                <div class="col-md-12" style="font-size:15px;">
+                    <p><b>姓名 : </b><input id="fname" type="text" name="name" ></p>
+                </div>
+            </div>
+            <br>
+
+            <div class="row">
+                <div class="col-md-12" style="font-size:15px;">
+                    <p><b>性别 : </b> 
+                        <form action="#">
+                            <input id="male" type="radio" name="gender" value="1"> 男  
+                            <input id="female" type="radio" name="gender" value="2"> 女
+                        </form>
+                    </p>
+                </div>
+            </div>
+            <br>
+
+            <div class="row">
+                <div class="col-md-12" style="font-size:15px;">
+                    <p><b>个人爱好 :</b>
+                        <form action="#">
+                            <input type="checkbox" class="basketball" name="hobby" onclick="chebo(1)" value="1"> 篮球
+                            <input type="checkbox" class="badminton" name="hobby1" onclick="chebo(2)" value="2"> 羽毛球
+                            <input type="checkbox" class="running" name="hobby2" onclick="chebo(3)" value="3"> 跑步
+                            <input type="checkbox" class="Reading" name="hobby3" onclick="chebo(4)" value="4"> 读书
+                        </form>
+                    </p>
+                </div>
+            </div>
+            <br>
+
+            <div class="row">
+                <div class="col-md-12" style="font-size:15px;">
+                    <p><b>喜欢的课程 :</b>
+                        <select id="testingDropdown" name="course" >
+                            <option id="mathematics" value="1" >数学</option>
+                            <option id="chinese" value="2" >语文</option>
+                            <option id="science" value="3" >科学</option>
+                            <option id="biological" value="4" >生物</option>
+                        </select>
+                    </p>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-12" style="font-size:15px;">
+                    <p><button id="dblClkBtn" ondblclick="alert('嗨，测试');">双击功能 生成警告提醒!(此方法只为测试自动化双击功能学习)</button></p>
+                </div>
+            </div>
+            <br>
+
+            <div class="row">
+                <div class="col-md-12" style="font-size:15px;">
+                    <p><b>单击按钮可生成警告框 : </b>
+                          <button onclick="alert('嗨，测试');">单击功能生成警告提醒!(此方法只为测试自动化双击功能学习)</button>
+                    </p>
+                </div>
+            </div>
+            <br>
+
+            <div class="row">
+                <div class="col-md-12" style="font-size:15px;">
+                    <p> <b> 保存: </b>
+                        <button id="buttn" onclick="generateConfirmBox()">保存</button>
+                    </p>
+                    <p id="demo"></p>
+                </div>
+            </div>
+            <br>
+
+            <div class="row">
+                <div class="col-md-12" style="font-size:15px;">
+                    <p>拖放示例-将下图拖放到文本框中</p>
+
+                    <div id="targetDiv" ondrop="drop(event)" ondragover="allowDrop(event)" style="width:400px;height:150px;padding:10px;border:1px solid #aaaaaa;"></div>
+                    <img id="sourceImage" src="https://www.yiibai.com/static/img/logo.png" alt="yiibai" draggable="true" ondragstart="drag(event)" height="120px">
+
+                </div>
+            </div>
+            <br>
+        </div>
+        </form>
+        <script>
+            function generateConfirmBox()
+            {
+                var r=confirm("确认保存个人信息吗？!");
+                if (r==true)
+                {
+                	$(addFormAll).form({
+                		url : "http://localhost:8082/myuser/updauser",
+                		onSubmit : function() {
+                			var isValid = $(this).form('validate');
+                			return isValid;
+                		},
+                		dataType:"json",
+                		success : function(data) {
+                			var json = JSON.parse(data);
+                			if (json.result == "1") {
+                				alert("保存个人信息成功");
+                				return;
+                			} else {
+                				alert("保存信息失败");
+                				return;
+                			}
+                		}
+                	});
+                }
+            }
+
+            function allowDrop(ev)
+            {
+                ev.preventDefault();
+            }
+
+            function drag(ev)
+            {
+                ev.dataTransfer.setData("Text",ev.target.id);
+            }
+
+            function drop(ev)
+            {
+                ev.preventDefault();
+                var data=ev.dataTransfer.getData("Text");
+                ev.target.appendChild(document.getElementById(data));
+            }
+            
+            function chebo(ojb){
+            var sta=$("#status").val();
+            var sta1=$("#status1").val();
+            var sta2=$("#status2").val();
+            var sta3=$("#status3").val();
+            	if(ojb==1){
+            		if(sta==1){
+            			$("#hobby").val(ojb);
+            			$("#status").val("2");
+            		}if(sta==2){
+            			$("#hobby").val("0");
+            			$("#status").val("1");
+            		}
+            	}if(ojb==2){
+            		if(sta1==1){
+            			$("#hobby1").val(ojb);
+            			$("#status1").val("2");
+            		}if(sta1==2){
+            			$("#hobby1").val("0");
+            			$("#status1").val("1");
+            		}
+            	}if(ojb==3){
+            		if(sta2==1){
+            			$("#hobby2").val(ojb);
+            			$("#status2").val("2");
+            		}if(sta2==2){
+            			$("#hobby2").val("0");
+            			$("#status2").val("1");
+            		}
+            	}if(ojb==4){
+            		if(sta3==1){
+            			$("#hobby3").val(ojb);
+            			$("#status3").val("2");
+            		}if(sta3==2){
+            			$("#hobby3").val("0");
+            			$("#status3").val("1");
+            		}
+            	}
+            }
+
+        </script>
+    </body>
+</html>
+

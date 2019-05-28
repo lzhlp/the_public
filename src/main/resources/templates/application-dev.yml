@@ -1,0 +1,33 @@
+server:
+  port: 8082
+  session: 
+    timeout: 256200  
+logging: 
+  config: classpath:logback-boot.xml
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/lpublicplay
+    username: root
+    password: root
+  jpa:
+    hibernate:
+      ddl-auto: update
+      naming:
+        strategy: org.hibernate.cfg.ImprovedNamingStrategy
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+    show-sql: true
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    timeout: 20000
+    pool:
+      max-active: 8
+      min-idle: 0
+      max-idle: 8
+      max-wait: -1
+    password:
+  application:
+    name: spring-boot-redis

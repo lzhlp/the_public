@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo" xmlns="http://www.springframework.org/schema/beans"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+       http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+	<!-- consumer's application name, used for tracing dependency relationship 
+		(not a matching criterion), don't set it same as provider -->
+	<dubbo:application name="dubbo_consumer_tryz" />
+
+	<dubbo:registry protocol="zookeeper" address="47.94.198.47:2181,47.94.198.47:2182,47.94.198.47:2183" check="false" subscribe="false" register="" />
+	<dubbo:protocol name="dubbo" port="20880" />
+	
+	<bean id="service1" class="com.example.demo.java.service.impl.DubboIml" />
+	
+	<bean id="service2" class="com.example.demo.java.service.impl.DubboIml2" />
+	
+	<dubbo:service interface="com.example.demo.java.service.DubboService"  ref="service1" group="group1"  />
+	
+	<dubbo:service interface="com.example.demo.java.service.DubboService2"  ref="service2" group="group2" />
+
+	<!-- generate proxy for the remote service, then demoService can be used 
+		in the same way as the local regular interface -->
+<!-- 	<dubbo:reference id="producerService" check="true"
+		interface="com.example.demo.java.service" timeout="6000" retries="0">
+		<dubbo:method name="produce" ></dubbo:method>
+	</dubbo:reference>
+ -->
+</beans>
