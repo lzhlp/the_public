@@ -1,5 +1,7 @@
 server:
   port: 8082
+  session: 
+    timeout: 256200
 logging: 
   config: classpath:logback-boot.xml
 spring:
