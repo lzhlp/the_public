@@ -33,7 +33,7 @@ public class UpdateInfoController {
 	 @Autowired
      ApplicationContext applicationContext;
 	    /**
-	     *  添加更新信息 鲁春
+	     *  添加更新信息 鲁春峰
 	     * @param weixinuser
 	     * @return
 	     */
